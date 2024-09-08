@@ -385,6 +385,7 @@ document.getElementById('submitReportButton').addEventListener('click', function
     document.getElementById('submitReportButton').disabled = true;
     const reportType = document.getElementById('reportType');
     const userName = document.getElementById('userName');
+    const CanPublish = document.getElementById('CanPublish');
     const reportMessage = document.getElementById('reportMessage');
     if (!reportMessage.value.trim()) {
         msg.innerHTML = 'الرجاء كتابة نص الرسالة';
@@ -392,7 +393,7 @@ document.getElementById('submitReportButton').addEventListener('click', function
         document.getElementById('submitReportButton').disabled = false;
         return;
     }
-    const finalReportMessage = `${reportMessage.value}\n\n-- الاسم: ${userName.value}`;
+    const finalReportMessage = `${reportMessage.value}\n\n-- الاسم: ${userName.value}\n\n-- مسموح النشر : ${CanPublish.value}`;
 
     fetch('https://examinationsystem-dfaxfka2hqhwgncc.westeurope-01.azurewebsites.net/api/Report/add', {
         method: 'POST',
@@ -412,6 +413,7 @@ document.getElementById('submitReportButton').addEventListener('click', function
         .then(response => {
             if (response.status === 201 || response.status === 200) {
                 reportType.value = 'اقتراح';
+                CanPublish.value = 'نعم';
                 reportMessage.value = '';
                 return response.text();
             } else if (response.status === 400) {
