@@ -1,0 +1,264 @@
+body {
+    font-family: "Readex Pro", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bacground-body);
+    color: var(--color-body);
+    direction: rtl;
+    text-align: right;
+
+}
+
+.student-answer {
+    background-color: #303030;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.student-answer h4 {
+    color: #007BFF;
+}
+
+.exam-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--container-background);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+h1,
+h2,
+h3 {
+    color: var(--color-body);
+}
+
+p.description {
+    text-align: center;
+    font-size: 13px;
+    line-height: 23px;
+    margin: 10px auto 15px;
+}
+
+.question {
+    margin-bottom: 20px;
+    direction: ltr;
+    /* تحديد اتجاه النص ليكون من اليسار لليمين */
+    text-align: left;
+    /* محاذاة النص لليمين */
+
+}
+
+.options {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.option {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+
+}
+
+.option input[type="radio"] {
+    accent-color: #00BFFF;
+}
+
+/*
+.btn-submit {
+display: inline-block;
+padding: 10px 20px;
+margin-top: 20px;
+background-color: #76ff03;
+color: #121212;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 16px;
+transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+background-color: #64dd17;
+}
+*/
+.btn-submit {
+    margin: 10px auto;
+    display: block;
+}
+
+
+.result-container {
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--container-background);
+    color: var(--container-color);
+}
+
+.result-container h2 {
+    margin-top: 0;
+    color: var(--h2-color);
+}
+
+.result-container p {
+    margin-top: 0;
+    color: white;
+}
+
+.report-container {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+}
+
+.report-button {
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: none;
+    background: transparent;
+}
+
+
+#theme-switch {
+    cursor: pointer;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 25px;
+    height: 25px;
+    background: url('https://awik.io/demo/moon.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#theme-switch:checked {
+    background: url('https://awik.io/demo/sun.svg');
+}
+
+
+label {
+    margin: 0 5px;
+}
+
+:root[data-theme='light'] {
+    --bacground-body: #ffffff;
+    --color-body: #000000;
+    --h2-color: #000000;
+    --container-background: #e4e6eb;
+    --container-color: #252525;
+
+    .result-container h4,
+    p {
+        margin-top: 0;
+        color: #000000;
+    }
+}
+
+:root[data-theme='dark'] {
+    --bacground-body: #00181c;
+    --color-body: #ffffff;
+    --h2-color: #ffffff;
+    --container-background: #18191a;
+    --container-color: #5a5a5a;
+
+    .result-container h4,
+    p {
+        margin-top: 0;
+        color: #c8e6c9;
+    }
+}
+
+
+/*for google report*/
+.hBW7Hb {
+    display: none;
+}
+
+.report-container {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+}
+
+.report-button {
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+}
+
+#reportForm {
+    position: absolute;
+    bottom: 5px;
+    left: -360px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    transition: all .3s ease-out;
+}
+
+#reportForm h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.report-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#reportForm textarea,
+#reportForm select,
+#reportForm input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px 0 10px 0;
+    box-sizing: border-box;
+    resize: none;
+}
+
+#reportForm button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+#reportForm button:hover {
+    background-color: #218838;
+}
+
+.message {
+    color: #28a745;
+    font-size: 14px;
+    margin: 10px 0 5px;
+}
+
+.report-btn {
+    opacity: .8;
+    cursor: pointer;
+}
+
+.report-btn:hover {
+    opacity: 1;
+}

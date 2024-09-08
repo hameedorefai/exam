@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="آلة حاسبة لحساب العلامة النهائية للامتحان بناءً على العلامات النصفي والنشاط وعلامة المادة. استخدم هذه الآلة الحاسبة للحصول على تقدير دقيق لعلامتك النهائية.">
+    <meta name="keywords" content="حاسبة, علامة امتحان, علامات, تعليم, جامعة, منصة زمايل">
+    <meta name="author" content="موقع زمايل">
+    <meta property="og:title" content="آلة حاسبة لحساب العلامة النهائية - زمايل">
+    <meta property="og:description"
+        content="احسب علامتك النهائية في الامتحانات باستخدام هذه الآلة الحاسبة. ادخل العلامات النصفي والنشاط وعلامة المادة للحصول على تقدير دقيق.">
+    <meta property="og:image" content="رابط-الصورة-التي-تريد-عرضها.jpg">
+    <meta property="og:url" content="https://www.zamayl.com/calc">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <title>آلة حاسبة لحساب الامتحان النهائي خاصة بموقع زمايل www.zamayl.com</title>
+
+    <title>
+        آلة حاسبة لحساب الامتحان النهائي خاصة بموقع زمايل www.zamayl.com
+    </title>
+    <style>
+        @keyframes fireworks {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+
+        .firework {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: transparent;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fireworks 1s ease-out forwards;
+        }
+
+        .firework::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background-color: inherit;
+            animation: inherit;
+        }
+
+        .colors {
+            background-color: transparent;
+        }
+
+        .colors::before {
+            background-color: inherit;
+        }
+
+        #activityCheck {
+            color: #4CAF50;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        body {
+            font-size: 14px;
+            text-align: center;
+            /* توسيط النص في الصفحة */
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 10px;
+        }
+
+        #copyButton {
+            font-size: 12px;
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #checkMark {
+            color: #4CAF50;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #008000;
+            /* لون أخضر */
+            font-size: 18px;
+        }
+
+        .smiley-face {
+            font-size: 24px;
+            margin-top: 10px;
+            /* تم إضافة هذا للتباعد بين النتيجة والوجه المبتسم */
+        }
+
+        info-icon {
+            cursor: pointer;
+            border-bottom: 1px dashed #000;
+            margin-left: 5px;
+            font-size: 16px;
+        }
+
+        .note {
+            display: block;
+            font-size: 9px;
+            margin-bottom: 15px;
+
+
+
+        }
+
+        b {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #taskMark {
+            margin-bottom: 0;
+        }
+    </style>
+
+
+
+
+
+    <style>
+        .report-container * {
+            font-family: "Readex Pro", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .report-container {
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            direction: rtl;
+            text-align: right;
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 80px;
+            left: 0;
+        }
+
+        .report-button {
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: transparent;
+        }
+
+        #reportForm {
+            position: absolute;
+            bottom: 5px;
+            left: -360px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            transition: all .3s ease-out;
+        }
+
+        #reportForm h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .report-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #reportForm textarea,
+        #reportForm select,
+        #reportForm input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0 10px 0;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        #reportForm button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        #reportForm button:hover {
+            background-color: #218838;
+        }
+
+        .message {
+            color: #28a745;
+            font-size: 14px;
+            margin: 10px 0 5px;
+        }
+
+        .report-btn {
+            opacity: .8;
+            cursor: pointer;
+        }
+
+        .report-btn:hover {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <p> </p>
+    <p> </p>
+    <p> </p>
+
+    <p> </p>
+
+
+    <div class="calculator">
+        <div>
+            <h2>حساب علامة الامتحان النهائي</h2>
+
+            <label for="midMark">أدخل علامة الامتحان النصفي</label>
+            <input type="number" id="midMark" min="0" max="100">
+            <div class="error-message" id="midMarkError"></div>
+
+
+
+
+            <label for="taskMark" style="display: flex; align-items: center; justify-content: center;">
+                <!--<span style="font-size: 12px; color: #0066cc; ; cursor: pointer; margin-right: 5px;" onclick="openActivityPage()">إن وُجد</span>-->
+
+                <span style="text-align: center;">أدخل علامة النشاط</span>
+
+            </label>
+             
+
+
+            <input type="number" id="taskMark" min="0" max="100">
+            <span class='note'>إن كانت <b onclick='return openActivityPage()'>المادة بدون نشاط</b> يرجى ترك خيار الإدخال
+                فارغًا </span>
+            <div class="error-message" id="taskMarkError"></div>
+
+
+
+
+
+
+
+
+            <label for="subjectMark">أدخل علامة المادة</label>
+            <input type="number" id="subjectMark" min="0" max="100">
+            <div class="error-message" id="subjectMarkError"></div>
+
+            <button onclick="calculateFinalMark()">حساب العلامة</button>
+
+            <p class="result" id="finalMarkResult"></p>
+            <div class="smiley-face" id="smileyFace"></div>
+        </div>
+
+        <div class="button-container">
+            <span id="checkMark"></span>
+            <button id="copyButton" onclick="copyLink()">نسخ</button>
+            <span>انسخ رابط الحاسبة لمشاركتها في أي مكان</span>
+        </div>
+
+
+        <div class="report-container">
+            <button id="reportButton" class="report-button report-btn">📝</button>
+
+            <div id="reportForm">
+                <div class='report-form-header'>
+                    <p>إبلاغ</p>
+                    <p class='report-btn'>X</p>
+                </div>
+                <p>يرجى إدخال رسالة نصية للإبلاغ عن أي مشكلة أو تقديم اقتراح. سيقوم المشرفون بقرائتها والعمل عليها بعون
+                    الله.</p>
+                <p><a href="https://www.zamayl.com/reports" target="_blank">مشاهدة الإبلاغات السابقة</a></p>
+
+                <!-- نوع الإبلاغ -->
+                <label for="reportType">نوع الإبلاغ:</label>
+                <select id="reportType" name="reportType" required>
+                    <option value="اقتراح">اقتراح</option>
+                    <option value="مشكلة تقنية">مشكلة تقنية</option>
+                    <option value="شكوى">شكوى</option>
+                    <option value="أخرى">أخرى</option>
+                </select>
+
+                <label for="userName">اسم المرسل:</label>
+                <input type="text" id="userName" name="userName" placeholder="اكتب اسمك هنا (اختياري)">
+
+                <label for="reportMessage">نص الإبلاغ:</label>
+                <textarea id="reportMessage" name="reportMessage" placeholder="اكتب رسالتك هنا..."
+                    required></textarea><br>
+                <div id="messages" class="message"></div>
+                <button type="submit" id="submitReportButton">إرسال الإبلاغ</button>
+
+            </div>
+        </div>
+
+
+        <script>
+
+            function copyLink() {
+                const text1 = "لحساب علامة الامتحان النهائي :";
+                const link = "https://www.zamayl.com/calc";
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text1 + '\n' + link;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const checkMark = document.getElementById('checkMark');
+                checkMark.innerHTML = '&#10004;';
+
+                setTimeout(function () {
+                    checkMark.innerHTML = '';
+                }, 2000);
+            }
+
+            function checkValidation(mark) {
+                if (mark > 100 && mark <= 102) {
+                    mark = 100;
+                }
+                return (mark >= 0 && mark <= 100);
+            }
+
+            function checkValidMark2(Mark2) {
+                if (Mark2 > 100 && Mark2 <= 102) {
+                    Mark2 = 100;
+                }
+                return checkValidation(Mark2);
+            }
+
+            function showError(id, message) {
+                var errorElement = document.getElementById(id + "Error");
+                errorElement.textContent = message;
+            }
+
+            function clearError(id) {
+                var errorElement = document.getElementById(id + "Error");
+                errorElement.textContent = "";
+            }
+            function createFirework() {
+                const colors = ['#FF5733', '#FFBD33', '#75FF33', '#33FFBD', '#33D7FF', '#3375FF', '#8C33FF', '#FF33F6'];
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(firework);
+
+                firework.style.top = (50 + Math.random() * 30 - 15) + '%';
+                firework.style.left = (50 + Math.random() * 30 - 15) + '%';
+
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+
+            function triggerFireworks() {
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(createFirework, i * 100);
+                }
+            }
+
+            function calculateFinalMark() {
+                var midMark = parseFloat(document.getElementById("midMark").value);
+                var subjectMark = parseFloat(document.getElementById("subjectMark").value);
+
+                var taskMark;
+                if (document.getElementById("taskMark").value !== "") {
+                    taskMark = parseFloat(document.getElementById("taskMark").value);
+                } else {
+                    taskMark = -1;
+                }
+
+                var MARK1_RATIO = 0;
+                var TASK_MARK_RATIO = 0;
+                var MARK2_RATIO = 0;
+
+                clearError("midMark");
+                clearError("taskMark");
+                clearError("subjectMark");
+
+                if (!checkValidation(midMark)) {
+                    showError("midMark", "الرجاء إدخال قيمة صحيحة بين 0 و100.");
+                    return;
+                }
+
+                if (!checkValidation(subjectMark)) {
+                    showError("subjectMark", "الرجاء إدخال قيمة صحيحة بين 0 و100.");
+                    return;
+                }
+
+                if (taskMark != -1) {
+                    if (!checkValidation(taskMark)) {
+                        showError("taskMark", "الرجاء إدخال قيمة صحيحة بين 0 و100.");
+                        return;
+                    }
+
+                    MARK1_RATIO = 0.45;
+                    TASK_MARK_RATIO = 0.10;
+                    MARK2_RATIO = 0.45;
+
+                    var Mark1 = (midMark * MARK1_RATIO);
+                    var taskMarkRatio = taskMark * TASK_MARK_RATIO;
+                    var Mark2 = (subjectMark - (Mark1 + taskMarkRatio)) / MARK2_RATIO;
+
+                    var resultElement = document.getElementById("finalMarkResult");
+                    var smileyFaceElement = document.getElementById("smileyFace");
+
+                    if (isNaN(Mark2) || !checkValidMark2(Mark2) || subjectMark !== Math.ceil(Mark1 + taskMarkRatio + (Mark2 * MARK2_RATIO))) {
+                        resultElement.textContent = "";
+                        smileyFaceElement.textContent = "";
+                        showError("subjectMark", "الرجاء التحقق من الإدخالات مرة أخرى.");
+                        return;
+                    }
+
+                } else {
+                    MARK1_RATIO = 0.5;
+                    MARK2_RATIO = 0.5;
+
+                    var Mark1 = (midMark * MARK1_RATIO);
+                    var Mark2 = (subjectMark - Mark1) / MARK2_RATIO;
+
+                    var resultElement = document.getElementById("finalMarkResult");
+                    var smileyFaceElement = document.getElementById("smileyFace");
+
+                    if (isNaN(Mark2) || !checkValidMark2(Mark2) || subjectMark !== Math.ceil(Mark1 + (Mark2 * MARK2_RATIO))) {
+                        resultElement.textContent = "";
+                        smileyFaceElement.textContent = "";
+                        showError("subjectMark", "الرجاء التحقق من الإدخالات مرة أخرى.");
+                        return;
+                    }
+                }
+
+                if (Mark2 > 100 && Mark2 <= 102) {
+                    Mark2 = 100;
+                }
+
+                var resultElement = document.getElementById("finalMarkResult");
+                var smileyFaceElement = document.getElementById("smileyFace");
+                resultElement.textContent = "علامة الامتحان النهائي : " + Mark2.toFixed(2);
+
+                if (Mark2 == 100) {
+                    smileyFaceElement.textContent = "😊 الـف مـبـــروك";
+
+                    triggerFireworks(); triggerFireworks();
+                } else if (Mark2 >= 80 && subjectMark >= 50) {
+                    smileyFaceElement.textContent = "😊";
+                    triggerFireworks();
+                } else if (Mark2 >= 80) {
+                    smileyFaceElement.textContent = "😊";
+                } else {
+                    smileyFaceElement.textContent = "";
+                }
+            }
+
+            function calculateFinalMark1() {
+                var midMark = parseFloat(document.getElementById("midMark").value);
+                var subjectMark = parseFloat(document.getElementById("subjectMark").value);
+
+                var taskMark;
+                if (document.getElementById("taskMark").value !== "") {
+                    taskMark = parseFloat(document.getElementById("taskMark").value);
+                }
+                else {
+                    taskMark = -1;
+                }
+
+
+
+
+
+                var MARK1_RATIO = 0;
+                var TASK_MARK_RATIO = 0;
+                var MARK2_RATIO = 0;
+
+                clearError("midMark");
+                clearError("taskMark");
+                clearError("subjectMark");
+
+                if (!checkValidation(midMark)) {
+                    showError("midMark", "الرجاء إدخال قيمة صحيحة بين 0 و100.");
+                    return;
+                }
+
+
+                if (!checkValidation(subjectMark)) {
+                    showError("subjectMark", "الرجاء إدخال قيمة صحيحة بين 0 و100.");
+                    return;
+                }
+
+                if (taskMark != -1) {
+                    if (!checkValidation(taskMark)) {
+                        showError("taskMark", "الرجاء إدخال قيمة صحيحة بين 0 و100.");
+                        return;
+                    }
+
+                    MARK1_RATIO = 0.45;
+                    TASK_MARK_RATIO = 0.10;
+                    MARK2_RATIO = 0.45;
+
+                    var Mark1 = (midMark * MARK1_RATIO);
+                    var taskMarkRatio = taskMark * TASK_MARK_RATIO;
+
+                    var Mark2 = (subjectMark - (Mark1 + taskMarkRatio)) / MARK2_RATIO;
+
+                    var resultElement = document.getElementById("finalMarkResult");
+                    var smileyFaceElement = document.getElementById("smileyFace");
+
+                    if (isNaN(Mark2) || !checkValidMark2(Mark2) || subjectMark !== Math.ceil(Mark1 + taskMarkRatio + (Mark2 * MARK2_RATIO))) {
+                        resultElement.textContent = "";
+                        smileyFaceElement.textContent = "";
+                        showError("subjectMark", "الرجاء التحقق من الإدخالات مرة أخرى.");
+                        return;
+                    }
+
+                }
+
+                else {
+
+                    MARK1_RATIO = 0.5;
+                    MARK2_RATIO = 0.5;
+
+
+                    var Mark1 = (midMark * MARK1_RATIO);
+
+                    var Mark2 = (subjectMark - Mark1) / MARK2_RATIO;
+
+                    var resultElement = document.getElementById("finalMarkResult");
+                    var smileyFaceElement = document.getElementById("smileyFace");
+
+                    if (isNaN(Mark2) || !checkValidMark2(Mark2) || subjectMark
+                        !== Math.ceil(Mark1 + (Mark2 * MARK2_RATIO))) {
+                        resultElement.textContent = "";
+                        smileyFaceElement.textContent = "";
+                        showError("subjectMark", "الرجاء التحقق من الإدخالات مرة أخرى.");
+                        return;
+                    }
+
+                }
+
+
+
+                if (Mark2 > 100 && Mark2 <= 102) {
+                    Mark2 = 100;
+                }
+
+                resultElement.textContent = "علامة الامتحان النهائي : " + Mark2.toFixed(2);
+
+                if (Mark2 == 100) {
+                    smileyFaceElement.textContent = "😊الـف مـبـــروك";
+                }
+
+                else if (Mark2 >= 80) {
+                    smileyFaceElement.textContent = "😊";
+                }
+
+                else {
+                    smileyFaceElement.textContent = "";
+                }
+
+            }
+            function openActivityPage() {
+                window.open('https://www.zamayl.com/non-activity-courses', '_blank');
+
+            }
+
+
+
+        </script>
+
+        <script>
+            var reportBtns = document.querySelectorAll('.report-btn');
+            reportBtns.forEach(r => {
+                r.addEventListener('click', function () {
+                    const form = document.getElementById('reportForm');
+                    form.style.left = form.style.left === '5px' ? '-360px' : '5px';
+                });
+            });
+
+            document.getElementById('submitReportButton').addEventListener('click', function (event) {
+                event.preventDefault();
+                var msg = document.getElementById('messages');
+                msg.innerHTML = 'جارِ الإرسال';
+                msg.style.color = '#000';
+
+                document.getElementById('submitReportButton').disabled = true;
+                const reportType = document.getElementById('reportType');
+                const userName = document.getElementById('userName');
+                const reportMessage = document.getElementById('reportMessage');
+                if (!reportMessage.value.trim()) {
+                    msg.innerHTML = 'الرجاء كتابة نص الرسالة';
+                    msg.style.color = 'red';
+                    document.getElementById('submitReportButton').disabled = false;
+                    return;
+                }
+                const finalReportMessage = `${reportMessage.value}\n\n-- الاسم: ${userName.value}`;
+
+                fetch('https://examinationsystem-dfaxfka2hqhwgncc.westeurope-01.azurewebsites.net/api/Report/add', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'text/plain',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userID: 18,
+                        reportType: reportType.value,
+                        reportText: finalReportMessage,
+                        examID: 0,
+                        questionID: 0,
+                        optionID: 0
+                    })
+                })
+                    .then(response => {
+                        if (response.status === 201 || response.status === 200) {
+                            reportType.value = 'اقتراح';
+                            reportMessage.value = '';
+                            return response.text();
+                        } else if (response.status === 400) {
+                            return response.json().then(error => {
+                                throw new Error(`${error.title}: ${error.detail}`);
+                            });
+                        } else {
+                            document.getElementById('submitReportButton').disabled = false;
+                            throw new Error('خطأ في الخادم');
+                        }
+                    })
+                    .then(data => {
+                        msg.innerHTML = 'تم إرسال الإبلاغ بنجاح!';
+                        msg.style.color = 'green';
+                        setTimeout(() => {
+                            document.getElementById('submitReportButton').disabled = false;
+                        }, 2000)
+                    })
+                    .catch(error => {
+                        document.getElementById('submitReportButton').disabled = false;
+                        msg.innerHTML = 'فشل إرسال الإبلاغ\n' + error;
+                        msg.style.color = 'red';
+                    });
+            });
+        </script>
+</body>
+
+</html>
